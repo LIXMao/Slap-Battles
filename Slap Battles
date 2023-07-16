@@ -1,0 +1,42 @@
+-- epic
+
+                repeat wait() until game:IsLoaded() wait()
+                spawn(function()
+                game:GetService("Players").LocalPlayer.Idled:connect(function()
+                game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+                end)
+                end)
+
+if game.PlaceId == 9431156611 then
+local bypass;
+    bypass = hookmetamethod(game, "__namecall", function(method, ...) 
+        if getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.Ban then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.AdminGUI then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.WS then
+            return
+        elseif getnamecallmethod() == "FireServer" and method == game.ReplicatedStorage.Events.WS2 then
+            return
+        end
+        return bypass(method, ...)
+    end)
+
+Tab1:AddToggle({
+                    Name = "Fake Nametag",
+                    Default = false,
+                    Callback = function(bool)
+Auto_Change = bool
+        if bool == true then
+        game.Players.LocalPlayer.Character:FindFirstChild("Head").Nametag.TextLabel.Text = "Walkthrough"
+            task.wait()
+            game.Players.LocalPlayer.CharacterAdded:Connect(function()
+                if Auto_Change == true then
+                repeat task.wait()
+                until game.Players.LocalPlayer.Character:FindFirstChild("Head")
+                game.Players.LocalPlayer.Character:FindFirstChild("Head").Nametag.TextLabel.Text = "Walkthrough"
+                end
+            end)
+        end
+end
+                })
